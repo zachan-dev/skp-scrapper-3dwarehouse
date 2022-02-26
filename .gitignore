@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # Node.js
-server/node_modules/
+node_modules/

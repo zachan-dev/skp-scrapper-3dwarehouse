@@ -5,7 +5,8 @@ const showMessage = (message) => {
 };
 
 const download = (urlO) => {
-    return fetch(urlO.url).then(resp => resp.blob())
+    return fetch(urlO.url, { mode: 'no-cors' })
+    .then(resp => resp.blob())
     .then(blob => {
         return {
             id: urlO.id,

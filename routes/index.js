@@ -2,6 +2,12 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const cheerio = require('cheerio');
+const cors = require('cors');
+
+const corsOptions = {
+  origin: 'https://skp-scrapper-3dwarehouse.herokuapp.com/',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
 const fetchModels = function(collection_id, collection_name, category) {
   const DOMAIN = "https://3dwarehouse.sketchup.com";
@@ -76,7 +82,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* POST add */
-router.post('/models', function(req, res, next) {
+router.post('/models', cors(corsOptions), function(req, res, next) {
   fetchModels(req.body.collectionID, req.body.collectionTitle, req.body.collectionCategory)
   .then(function(entriesDict) {
     res.json(entriesDict);

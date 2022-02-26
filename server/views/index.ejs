@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <form id="add-models-form" class="form-inline">
+      <div class="form-group mb-2">
+        <label for="collectionID" class="sr-only">Collection ID</label>
+        <input type="text" class="form-control" id="collectionID" name="collectionID" placeholder="Collection ID">
+      </div>
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="collectionTitle" class="sr-only">Collection Title</label>
+        <input type="text" class="form-control" id="collectionTitle" name="collectionTitle" placeholder="Collection Title">
+      </div>
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="collectionCategory" class="sr-only">Collection Category</label>
+        <input type="text" class="form-control" id="collectionCategory" name="collectionCategory" placeholder="Collection Category">
+      </div>
+      <button type="submit" class="btn btn-success mb-2">Add Models</button>
+    </form>
+    <button class="btn btn-primary" style="width:100%" id="multi-download-btn"><i class="fa fa-download"></i> Download</button>
+    <div id="console" class="container console text-center">
+      Console is ready
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12"><h3>Added <span id="current_count">0</span> Models:</h3></div>
+      </div>
+      <ul id="cards" class="row list-unstyled">
+        <!-- card(s) goes here-->
+      </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.js" integrity="sha512-UNbeFrHORGTzMn3HTt00fvdojBYHLPxJbLChmtoyDwB6P9hX5mah3kMKm0HHNx/EvSPJt14b+SlD8xhuZ4w9Lg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bluebird@3.7.2/js/browser/bluebird.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.js" integrity="sha512-NOmoi96WK3LK/lQDDRJmrobxa+NMwVzHHAaLfxdy0DRHIBc6GZ44CRlYDmAKzg9j7tvq3z+FGRlJ4g+3QC2qXg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+      var entriesDict = {}
+    </script>
+    <script src="/javascripts/index.js"></script>
+  </body>
+</html>

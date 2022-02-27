@@ -5,12 +5,11 @@ const showMessage = (message) => {
 };
 
 const download = (urlO) => {
-    return fetch(urlO.url, { mode: 'no-cors' })
-    .then(resp => resp.blob())
-    .then(blob => {
+    return fetch("/publiccontent/" + urlO.download_id)
+    .then(resp => {
         return {
             id: urlO.id,
-            blob
+            blob: resp.blob()
         }
     });
 };
@@ -53,6 +52,7 @@ $('#multi-download-btn').click(function(e){
     $(".download_url").each((i, url) => {
       urlOs.push({
           "id": $(url).data("id"),
+          "download_id": $(url).data("download_id"),
           "url": $(url).attr('href')
       });
     });
@@ -102,7 +102,7 @@ $('#add-models-form').submit(function(e) {
             var downloadUrl = $('<a>', {
                 class: "download_url",
                 href: entry.download_url,
-                data: { id },
+                data: { id, download_id: entry.download_id },
                 text: "Download",
                 download: "model_" + id + ".skp"
             }); 

@@ -12,11 +12,11 @@
     <form id="add-models-form" class="form-inline">
       <div class="form-group mb-2">
         <label for="collectionID" class="sr-only">Collection ID</label>
-        <input type="text" class="form-control" id="collectionID" name="collectionID" placeholder="Collection ID">
+        <input type="text" class="form-control" id="collectionID" name="collectionID" placeholder="Collection ID" required>
       </div>
       <div class="form-group mx-sm-3 mb-2">
         <label for="collectionTitle" class="sr-only">Collection Title</label>
-        <input type="text" class="form-control" id="collectionTitle" name="collectionTitle" placeholder="Collection Title">
+        <input type="text" class="form-control" id="collectionTitle" name="collectionTitle" placeholder="Collection Title" required>
       </div>
       <div class="form-group mx-sm-3 mb-2">
         <label for="collectionCategory" class="sr-only">Collection Category</label>
@@ -24,7 +24,9 @@
       </div>
       <button type="submit" class="btn btn-success mb-2">Add Models</button>
     </form>
-    <button class="btn btn-primary" style="width:100%" id="multi-download-btn"><i class="fa fa-download"></i> Download</button>
+    <br/>
+    <button class="btn btn-primary" style="width:100%; height:50px;" id="multi-download-btn"><i class="fa fa-download"></i> Download</button>
+    <br/><br/>
     <div id="console" class="container console text-center">
       Console is ready
     </div>

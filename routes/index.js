@@ -3,6 +3,10 @@ const router = express.Router();
 const axios = require('axios');
 const cheerio = require('cheerio');
 const cors = require('cors');
+const request = require('request');
+
+const DOMAIN = "https://3dwarehouse.sketchup.com";
+const API_URL = DOMAIN + "/warehouse/v1.0";
 
 const corsOptions = {
   origin: 'https://skp-scrapper-3dwarehouse.herokuapp.com/',
@@ -10,9 +14,8 @@ const corsOptions = {
 }
 
 const fetchModels = function(collection_id, collection_name, category) {
-  const DOMAIN = "https://3dwarehouse.sketchup.com";
   const PAGE_URL = DOMAIN + "/collection/" + collection_id + "/" + collection_name;
-  const BASE_URL = DOMAIN + '/warehouse/v1.0/entities';
+  const BASE_URL = API_URL + "/entities";
   const ENTRIES_DICT = {};
 
   return axios.get(PAGE_URL)
@@ -54,10 +57,12 @@ const fetchModels = function(collection_id, collection_name, category) {
         }
         if (binaries.s20) {
           s20 = binaries.s20;
-          download_url = s20.url;
+          download_id = s20.id;
+          download_url = s20.contentUrl;
         } else if (binaries.s19) {
           s19 = binaries.s19;
-          download_url = s19.url;
+          download_id = s19.id;
+          download_url = s19.contentUrl;
         }
 
         const data = { 
@@ -66,6 +71,7 @@ const fetchModels = function(collection_id, collection_name, category) {
           "author": author, 
           "author_id": author_id, 
           "thumbnail_url": thumbnail_url, 
+          "download_id": download_id,
           "download_url": download_url,
           "category": category
         };
@@ -90,6 +96,14 @@ router.post('/models', cors(corsOptions), function(req, res, next) {
   .catch(function(err) {
     res.json({ error: err }, 400);
   });
+});
+
+/* GET model blob */
+router.get('/publiccontent/:id', cors(corsOptions), function(req, res, next) {
+  const BASE_URL = API_URL + "/publiccontent";
+  const skp_url = BASE_URL + "/" + req.params.id;
+  res.set({'Content-Type': 'application/vnd.sketchup.skp'});
+  request.get(skp_url).pipe(res)
 });
 
 module.exports = router;

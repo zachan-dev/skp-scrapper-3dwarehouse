@@ -33,7 +33,10 @@ const exportZip = blobOs => {
       zip.file(`model_${blobO.id}.skp`, blobO.blob);
     });
     showMessage('Zipping the files');
-    zip.generateAsync({type: 'blob'}).then(zipFile => {
+    zip.generateAsync({type: 'blob'}, function updateCallback(metadata)
+    {
+        showMessage('Zipping progress: ' + metadata.percent.toFixed(2) + '%');
+    }).then(zipFile => {
       showMessage('Zipped and exporting to your browser');
       const currentDate = new Date().getTime();
       const fileName = `models_${currentDate}.zip`;
